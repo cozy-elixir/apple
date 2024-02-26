@@ -9,10 +9,10 @@ defmodule Apple do
   ## Examples
 
       iex> Apple.hello()
-      :world
+      "Hello, Apple."
 
   """
   def hello do
-    :world
+    "Hello, Apple."
   end
 end
