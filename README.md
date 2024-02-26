@@ -1,21 +1,5 @@
 # Apple
 
-**TODO: Add description**
+Common utilities for Apple related packages.
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `apple` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:apple, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/apple>.
-
+> Currently, this is used for claiming the ownership of the namespace of `Apple.*` modules. Checkout [Elixir Apple](https://github.com/elixir-apple) for more other packages.
