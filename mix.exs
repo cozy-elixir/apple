@@ -1,7 +1,7 @@
 defmodule Apple.MixProject do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "0.1.1"
   @description "Common utilities for Apple related packages"
   @source_url "https://github.com/elixir-apple/apple"
 
