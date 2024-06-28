@@ -1,18 +1,5 @@
 defmodule Apple do
   @moduledoc """
-  Documentation for `Apple`.
+  Utilities for building Apple SDKs.
   """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Apple.hello()
-      "Hello, Apple."
-
-  """
-  def hello do
-    "Hello, Apple."
-  end
 end
