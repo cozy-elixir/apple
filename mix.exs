@@ -1,7 +1,7 @@
 defmodule Apple.MixProject do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "0.3.0"
   @description "Utilities for building Apple SDKs."
   @source_url "https://github.com/cozy-elixir/apple"
 
@@ -9,7 +9,7 @@ defmodule Apple.MixProject do
     [
       app: :apple,
       version: @version,
-      elixir: "~> 1.14",
+      elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: @description,
