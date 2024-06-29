@@ -32,7 +32,7 @@ defmodule Apple.MixProject do
   defp deps do
     [
       {:jose, "~> 1.11"},
-      {:jason, ">= 0.0.0", only: :dev},
+      {:jason, ">= 0.0.0", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
