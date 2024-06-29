@@ -35,7 +35,7 @@ defmodule Apple.AppStoreServerAPI do
   @type bundle_id :: String.t()
 
   @doc """
-  Builds a JSON Web Token to authorize HTTP requests.
+  Builds a token to authorize HTTP requests.
 
   To get the value of arguments, such as `issuer_id`, `key_id` and so on,
   please read [Generating JSON Web Tokens for API requests](https://developer.apple.com/documentation/appstoreserverapi/generating_json_web_tokens_for_api_requests).
@@ -46,10 +46,14 @@ defmodule Apple.AppStoreServerAPI do
   Authorization: Bearer <JWT>
   ```  
   """
-  @spec build_jwt(issuer_id(), key_id(), private_key(), bundle_id()) :: String.t()
-  def build_jwt(issuer_id, key_id, private_key, bundle_id) do
+  @spec build_auth_token!(issuer_id(), key_id(), private_key(), bundle_id()) :: String.t()
+  def build_auth_token!(issuer_id, key_id, private_key, bundle_id)
+      when is_binary(issuer_id) and
+             is_binary(key_id) and
+             is_binary(private_key) and
+             is_binary(bundle_id) do
     issued_at = unix_time_in_seconds()
-    
+
     # Expire the token after 90 seconds.
     expired_at = issued_at + 90
 

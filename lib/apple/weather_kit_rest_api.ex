@@ -35,7 +35,7 @@ defmodule Apple.WeatherKitRestAPI do
   @type service_id :: String.t()
 
   @doc """
-  Builds a JSON Web Token to authorize HTTP requests.
+  Builds a token to authorize HTTP requests.
 
   To get the value of arguments, such as `team_id`, `key_id` and so on,
   please read [Request authentication for WeatherKit REST API](https://developer.apple.com/documentation/weatherkitrestapi/request_authentication_for_weatherkit_rest_api).
@@ -46,8 +46,8 @@ defmodule Apple.WeatherKitRestAPI do
   Authorization: Bearer <JWT>
   ```
   """
-  @spec build_jwt(team_id(), key_id(), private_key(), service_id()) :: String.t()
-  def build_jwt(team_id, key_id, private_key, service_id)
+  @spec build_auth_token!(team_id(), key_id(), private_key(), service_id()) :: String.t()
+  def build_auth_token!(team_id, key_id, private_key, service_id)
       when is_binary(team_id) and
              is_binary(key_id) and
              is_binary(private_key) and
