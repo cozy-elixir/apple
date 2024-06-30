@@ -1,6 +1,6 @@
-defmodule Apple.AppStoreServerNotifications do
+defmodule Apple.Signed do
   @moduledoc """
-  Utilities for [App Store Server Notifications](https://developer.apple.com/documentation/appstoreservernotifications).
+  Utilities for handling signed payload.
   """
 
   alias JOSE.{JWS, JWK}
@@ -18,12 +18,18 @@ defmodule Apple.AppStoreServerNotifications do
   @type signed_payload :: String.t()
 
   @typedoc """
-  The verified content extracted from signed payload.
+  The verified payload extracted from signed payload.
   """
   @type payload :: map()
 
   @doc """
   Verifies a signed payload.
+
+  Signed payloads are used in the responses of:
+
+    * [App Store Server API](https://developer.apple.com/documentation/appstoreserverapi)
+    * [App Store Server Notifications](https://developer.apple.com/documentation/appstoreservernotifications)
+    * ...
 
   ## References
 
@@ -31,10 +37,10 @@ defmodule Apple.AppStoreServerNotifications do
     * https://andrealeopardi.com/posts/verifying-apple-jwts/
 
   """
-  @spec verify_signed_payload(root_cert(), signed_payload()) ::
+  @spec verify(root_cert(), signed_payload()) ::
           {:ok, payload()}
           | {:error, :invalid_format | :invalid_cert_chain | :invalid_signature}
-  def verify_signed_payload(root_cert, signed_payload) do
+  def verify(root_cert, signed_payload) do
     with {:ok, cert_chain} <- extract_cert_chain(signed_payload),
          {:ok, public_key} <- verify_cert_chain(root_cert, cert_chain),
          {:ok, payload} <- verify_signature(public_key, signed_payload) do
