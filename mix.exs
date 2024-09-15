@@ -36,7 +36,6 @@ defmodule Apple.MixProject do
       {:ex_check, ">= 0.0.0", only: [:dev], runtime: false},
       {:credo, ">= 0.0.0", only: [:dev], runtime: false},
       {:dialyxir, ">= 0.0.0", only: [:dev], runtime: false},
-      {:doctor, ">= 0.0.0", only: [:dev], runtime: false},
       {:ex_doc, ">= 0.0.0", only: [:dev], runtime: false},
       {:mix_audit, ">= 0.0.0", only: [:dev], runtime: false}
     ]
@@ -45,7 +44,6 @@ defmodule Apple.MixProject do
   defp docs do
     [
       extras: ["README.md"],
-      main: "readme",
       source_url: @source_url,
       source_ref: "v#{@version}"
     ]

@@ -20,7 +20,7 @@ defmodule Apple.AppStoreServerAPI do
 
   It's in PEM format, like:
 
-  ```
+  ```text
   -----BEGIN PRIVATE KEY-----
   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   ...
@@ -42,7 +42,7 @@ defmodule Apple.AppStoreServerAPI do
 
   After building it, use it in the `Authorization` header like this:
 
-  ```
+  ```text
   Authorization: Bearer <JWT>
   ```  
   """
