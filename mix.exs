@@ -1,7 +1,7 @@
 defmodule Apple.MixProject do
   use Mix.Project
 
-  @version "0.4.1"
+  @version "0.5.0"
   @description "Utilities for building Apple SDKs."
   @source_url "https://github.com/cozy-elixir/apple"
   @changelog_url "https://github.com/cozy-elixir/apple/blob/v#{@version}/CHANGELOG.md"
