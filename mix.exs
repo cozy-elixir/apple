@@ -4,6 +4,7 @@ defmodule Apple.MixProject do
   @version "0.4.1"
   @description "Utilities for building Apple SDKs."
   @source_url "https://github.com/cozy-elixir/apple"
+  @changelog_url "https://github.com/cozy-elixir/apple/blob/v#{@version}/CHANGELOG.md"
 
   def project do
     [
@@ -43,7 +44,7 @@ defmodule Apple.MixProject do
 
   defp docs do
     [
-      extras: ["README.md"],
+      extras: ["README.md", "CHANGELOG.md"],
       source_url: @source_url,
       source_ref: "v#{@version}",
       groups_for_modules: groups_for_modules()
@@ -70,7 +71,10 @@ defmodule Apple.MixProject do
   defp package do
     [
       licenses: ["Apache-2.0"],
-      links: %{GitHub: @source_url}
+      links: %{
+        GitHub: @source_url,
+        Changelog: @changelog_url
+      }
     ]
   end
 
