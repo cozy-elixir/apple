@@ -45,7 +45,25 @@ defmodule Apple.MixProject do
     [
       extras: ["README.md"],
       source_url: @source_url,
-      source_ref: "v#{@version}"
+      source_ref: "v#{@version}",
+      groups_for_modules: groups_for_modules()
+    ]
+  end
+
+  defp groups_for_modules do
+    [
+      Types: [
+        Apple.Types.Developer,
+        Apple.Types.AppStoreConnect
+      ],
+      "Service-specific utilities": [
+        Apple.AppStoreServerAPI,
+        Apple.MapsServerAPI,
+        Apple.WeatherKitRestAPI
+      ],
+      "Misc utilities": [
+        Apple.Signed
+      ]
     ]
   end
 
