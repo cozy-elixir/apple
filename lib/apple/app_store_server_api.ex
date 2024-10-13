@@ -11,17 +11,17 @@ defmodule Apple.AppStoreServerAPI do
 
   > #### Note {: .info}
   > Using a private key of the "In-App Purchase" type is sufficient.
-  
+
   After building it, use it in the `Authorization` header like this:
 
   ```text
   Authorization: Bearer <JWT>
   ```
 
-  ## More
+  ## More resources
 
     * [Generating JSON Web Tokens for API requests](https://developer.apple.com/documentation/appstoreserverapi/generating_json_web_tokens_for_api_requests)
-  
+
   """
   @spec build_auth_token!(
           AppStoreConnect.issuer_id(),

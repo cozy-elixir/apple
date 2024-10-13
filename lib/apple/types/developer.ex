@@ -6,10 +6,10 @@ defmodule Apple.Types.Developer do
   @typedoc """
   The team ID, which is a 10-character string, like `"6MPDV0UYYX"`
 
-  It can be obtained from your Apple Developer account by following this path:
+  To obtain the team ID, sign into Apple Developer and complete the following
+  steps:
 
-    1. Sign into your Apple Developer account.
-    2. Navigate to "Membership details".
+    1. Navigate to "Membership details".
 
   """
   @type team_id :: String.t()
@@ -17,12 +17,12 @@ defmodule Apple.Types.Developer do
   @typedoc """
   The private key ID, like `"2Y9R5HMY68"`.
 
-  It can be obtained from your Apple Developer account by following this path:
+  To obtain the private key ID, sign into Apple Developer and complete the
+  following steps:
 
-    1. Sign into your Apple Developer account.
-    2. Navigate to "Certificates, IDs & Profiles".
-    3. Navigate to "Keys".
-    4. Click the plus button to add a new key.
+    1. Navigate to "Certificates, IDs & Profiles".
+    2. Navigate to "Keys".
+    3. Click the plus button to generate a new private key.
 
   """
   @type key_id :: String.t()
@@ -44,13 +44,13 @@ defmodule Apple.Types.Developer do
   @typedoc """
   The registered service ID, like `"com.example.weatherkit"`.
 
-  It can be obtained from your Apple Developer account by following this path:
+  To obtain the registered service ID, sign into Apple Developer and complete
+  the following steps:
 
-    1. Sign into your Apple Developer account.
-    2. Navigate to "Certificates, IDs & Profiles".
-    3. Navigate to "Identifiers".
-    4. Click the plus button to add a new identifier.
-    5. Select "Service IDs", and register a service ID.
+    1. Navigate to "Certificates, IDs & Profiles".
+    2. Navigate to "Identifiers".
+    3. Click the plus button to add a new identifier.
+    4. Select "Service IDs", and register a service ID.
 
   """
   @type service_id :: String.t()

@@ -11,6 +11,9 @@ defmodule Apple.MapsServerAPI do
   """
   @type origin :: String.t()
 
+  @doc """
+  Builds a token to authorize HTTP requests.
+  """
   @spec build_auth_token!(
           Developer.team_id(),
           Developer.key_id(),

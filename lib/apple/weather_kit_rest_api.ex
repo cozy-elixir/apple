@@ -9,14 +9,16 @@ defmodule Apple.WeatherKitRestAPI do
   @doc """
   Builds a token to authorize HTTP requests.
 
-  To get the value of arguments, such as `team_id`, `key_id` and so on,
-  please read [Request authentication for WeatherKit REST API](https://developer.apple.com/documentation/weatherkitrestapi/request_authentication_for_weatherkit_rest_api).
-
   After building it, use it in the `Authorization` header like this:
 
   ```text
   Authorization: Bearer <JWT>
   ```
+
+  ## More resources
+
+    * [Request authentication for WeatherKit REST API](https://developer.apple.com/documentation/weatherkitrestapi/request_authentication_for_weatherkit_rest_api)
+
   """
   @spec build_auth_token!(
           Developer.team_id(),
