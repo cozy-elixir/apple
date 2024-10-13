@@ -4,7 +4,7 @@ defmodule Apple.MapsServerAPI do
   """
 
   alias JOSE.{JWK, JWS, JWT}
-  alias Apple.Types.AppleDeveloper
+  alias Apple.Types.Developer
 
   @typedoc """
   Something like `"*.example.com"`.
@@ -12,9 +12,9 @@ defmodule Apple.MapsServerAPI do
   @type origin :: String.t()
 
   @spec build_auth_token!(
-          AppleDeveloper.team_id(),
-          AppleDeveloper.key_id(),
-          AppleDeveloper.private_key(),
+          Developer.team_id(),
+          Developer.key_id(),
+          Developer.private_key(),
           origin() | nil
         ) :: String.t()
   def build_auth_token!(team_id, key_id, private_key, origin \\ nil)

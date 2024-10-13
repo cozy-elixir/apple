@@ -1,4 +1,4 @@
-defmodule Apple.Types.AppleDeveloper do
+defmodule Apple.Types.Developer do
   @moduledoc """
   Provides Apple Developer related types.
   """

@@ -4,7 +4,7 @@ defmodule Apple.WeatherKitRestAPI do
   """
 
   alias JOSE.{JWK, JWS, JWT}
-  alias Apple.Types.AppleDeveloper
+  alias Apple.Types.Developer
 
   @doc """
   Builds a token to authorize HTTP requests.
@@ -19,10 +19,10 @@ defmodule Apple.WeatherKitRestAPI do
   ```
   """
   @spec build_auth_token!(
-          AppleDeveloper.team_id(),
-          AppleDeveloper.key_id(),
-          AppleDeveloper.private_key(),
-          AppleDeveloper.service_id()
+          Developer.team_id(),
+          Developer.key_id(),
+          Developer.private_key(),
+          Developer.service_id()
         ) :: String.t()
   def build_auth_token!(team_id, key_id, private_key, service_id)
       when is_binary(team_id) and
