@@ -4,37 +4,19 @@ defmodule Apple.MapsServerAPI do
   """
 
   alias JOSE.{JWK, JWS, JWT}
-
-  @typedoc """
-  The team ID, like `"6MPDV0UYYX"`.
-  """
-  @type team_id :: String.t()
-
-  @typedoc """
-  The private key ID, like `"2Y9R5HMY68"`.
-  """
-  @type key_id :: String.t()
-
-  @typedoc """
-  The private key associated with the `key_id`.
-
-  It's in PEM format, like:
-
-  ```text
-  -----BEGIN PRIVATE KEY-----
-  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  ...
-  -----END PRIVATE KEY-----
-  ```
-  """
-  @type private_key :: String.t()
+  alias Apple.Types.AppleDeveloper
 
   @typedoc """
   Something like `"*.example.com"`.
   """
   @type origin :: String.t()
 
-  @spec build_auth_token!(team_id(), key_id(), private_key(), origin() | nil) :: String.t()
+  @spec build_auth_token!(
+          AppleDeveloper.team_id(),
+          AppleDeveloper.key_id(),
+          AppleDeveloper.private_key(),
+          origin() | nil
+        ) :: String.t()
   def build_auth_token!(team_id, key_id, private_key, origin \\ nil)
       when is_binary(team_id) and
              is_binary(key_id) and

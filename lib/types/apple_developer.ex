@@ -40,4 +40,18 @@ defmodule Apple.Types.AppleDeveloper do
   ```
   """
   @type private_key :: String.t()
+
+  @typedoc """
+  The registered service ID, like `"com.example.weatherkit"`.
+
+  It can be obtained from your Apple Developer account by following this path:
+
+    1. Sign into your Apple Developer account.
+    2. Navigate to "Certificates, IDs & Profiles".
+    3. Navigate to "Identifiers".
+    4. Click the plus button to add a new identifier.
+    5. Select "Service IDs", and register a service ID.
+
+  """
+  @type service_id :: String.t()
 end
