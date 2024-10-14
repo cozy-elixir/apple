@@ -1,6 +1,14 @@
 defmodule Apple.MapsServerAPI do
   @moduledoc """
   Utilities for [Maps Server API](https://developer.apple.com/documentation/applemapsserverapi).
+
+  > #### Warning {: .warning}
+  >
+  > This service is not available in China, which means:
+  >
+  >   * If you are an Apple Developer in China, your account will not be able to apply for or use this service.
+  >   * If the request's source IP is located in China, the request will be denied.
+
   """
 
   alias JOSE.{JWK, JWS, JWT}
