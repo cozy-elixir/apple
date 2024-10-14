@@ -59,8 +59,8 @@ defmodule Apple.MixProject do
       ],
       "Service-specific utilities": [
         Apple.AppStoreServerAPI,
-        Apple.MapsServerAPI,
-        Apple.WeatherKitRestAPI
+        Apple.WeatherKitRestAPI,
+        Apple.MapsServerAPI
       ],
       "Misc utilities": [
         Apple.Signed
