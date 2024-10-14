@@ -13,7 +13,7 @@ defmodule Apple.Types.AppStoreConnect do
     2. Select the type of "Keys" that you need:
        - App Store Connect API
        - In-App Purchase
-    3. Look up the "Issue ID" on the page.
+    3. Look up the "Issuer ID" on the page.
 
   """
   @type issuer_id :: String.t()
