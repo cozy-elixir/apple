@@ -59,7 +59,8 @@ defmodule Apple.MixProject do
         Apple.Types.DeviceCheck,
         Apple.Types.AppleMusic,
         Apple.Types.GameCenter,
-        Apple.Types.CloudKit
+        Apple.Types.CloudKit,
+        Apple.Types.AppleDeveloper
       ],
       "Service-specific utilities": [
         Apple.AppStoreServerAPI,
@@ -69,7 +70,8 @@ defmodule Apple.MixProject do
         Apple.MapkitJSAPI,
         Apple.AppleMusicAPI,
         Apple.GameCenterAPI,
-        Apple.CloudKitAPI
+        Apple.CloudKitAPI,
+        Apple.AppleDeveloperAPI
       ],
       "Misc utilities": [
         Apple.Signed
