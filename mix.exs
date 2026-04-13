@@ -55,12 +55,15 @@ defmodule Apple.MixProject do
     [
       Types: [
         Apple.Types.Developer,
-        Apple.Types.AppStoreConnect
+        Apple.Types.AppStoreConnect,
+        Apple.Types.DeviceCheck
       ],
       "Service-specific utilities": [
         Apple.AppStoreServerAPI,
         Apple.WeatherKitRestAPI,
-        Apple.MapsServerAPI
+        Apple.MapsServerAPI,
+        Apple.DeviceCheckAPI,
+        Apple.MapkitJSAPI
       ],
       "Misc utilities": [
         Apple.Signed
