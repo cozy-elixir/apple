@@ -56,14 +56,16 @@ defmodule Apple.MixProject do
       Types: [
         Apple.Types.Developer,
         Apple.Types.AppStoreConnect,
-        Apple.Types.DeviceCheck
+        Apple.Types.DeviceCheck,
+        Apple.Types.AppleMusic
       ],
       "Service-specific utilities": [
         Apple.AppStoreServerAPI,
         Apple.WeatherKitRestAPI,
         Apple.MapsServerAPI,
         Apple.DeviceCheckAPI,
-        Apple.MapkitJSAPI
+        Apple.MapkitJSAPI,
+        Apple.AppleMusicAPI
       ],
       "Misc utilities": [
         Apple.Signed
