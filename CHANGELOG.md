@@ -2,6 +2,8 @@
 
 ## unreleased
 
+## v0.6.0
+
 - add `Apple.DeviceCheckAPI`
 - add `Apple.MapKitJSAPI`
 - add `Apple.AppleMusicAPI`
