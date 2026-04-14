@@ -11,6 +11,7 @@ defmodule Apple.MixProject do
       app: :apple,
       version: @version,
       elixir: "~> 1.17",
+      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: @description,
@@ -21,6 +22,9 @@ defmodule Apple.MixProject do
       aliases: aliases()
     ]
   end
+
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Run "mix help compile.app" to learn about applications.
   def application do
@@ -56,6 +60,8 @@ defmodule Apple.MixProject do
       Types: [
         Apple.Types.Developer,
         Apple.Types.AppStoreConnect,
+        Apple.Types.APNs,
+        Apple.Types.BusinessConnect,
         Apple.Types.DeviceCheck,
         Apple.Types.AppleMusic,
         Apple.Types.GameCenter,
@@ -65,6 +71,8 @@ defmodule Apple.MixProject do
       "Service-specific utilities": [
         Apple.AppStoreServerAPI,
         Apple.WeatherKitRestAPI,
+        Apple.APNsAPI,
+        Apple.BusinessConnectAPI,
         Apple.MapsServerAPI,
         Apple.DeviceCheckAPI,
         Apple.MapKitJSAPI,
@@ -74,6 +82,7 @@ defmodule Apple.MixProject do
         Apple.AppleDeveloperAPI
       ],
       "Misc utilities": [
+        Apple.JWT,
         Apple.Signed
       ]
     ]

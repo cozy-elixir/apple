@@ -6,7 +6,7 @@ defmodule Apple.DeviceCheckAPI do
   bits to detect fraudulent activity on iOS, tvOS, and macOS devices.
   """
 
-  alias JOSE.{JWK, JWS, JWT}
+  alias Apple.JWT
   alias Apple.Types.DeviceCheck
 
   @doc """
@@ -34,7 +34,7 @@ defmodule Apple.DeviceCheckAPI do
       when is_binary(issuer_id) and
              is_binary(key_id) and
              is_binary(private_key) do
-    issued_at = unix_time_in_seconds()
+    issued_at = JWT.unix_time_in_seconds()
 
     # Expire the token after 1 hour (3600 seconds) as per Apple docs
     expired_at = issued_at + 3600
@@ -51,12 +51,7 @@ defmodule Apple.DeviceCheckAPI do
       "exp" => expired_at
     }
 
-    jwk = JWK.from_pem(private_key)
-    jws = JWS.from_map(header)
-    jwt = JWT.from_map(payload)
-
-    {_, token} = JWT.sign(jwk, jws, jwt) |> JWS.compact()
-    token
+    JWT.sign_es256!(private_key, header, payload)
   end
 
   @doc """
@@ -70,8 +65,4 @@ defmodule Apple.DeviceCheckAPI do
   """
   @spec development_url() :: String.t()
   def development_url(), do: "https://api.development.devicecheck.apple.com"
-
-  defp unix_time_in_seconds() do
-    DateTime.utc_now() |> DateTime.to_unix()
-  end
 end

@@ -7,7 +7,7 @@ defmodule Apple.AppleMusicAPI do
   a user token for personalized requests.
   """
 
-  alias JOSE.{JWK, JWS, JWT}
+  alias Apple.JWT
   alias Apple.Types.AppleMusic
 
   @doc """
@@ -46,7 +46,7 @@ defmodule Apple.AppleMusicAPI do
   def build_auth_token!(key_id, private_key, opts \\ [])
       when is_binary(key_id) and
              is_binary(private_key) do
-    issued_at = unix_time_in_seconds()
+    issued_at = JWT.unix_time_in_seconds()
 
     # Apple Music tokens can be valid for up to 6 months
     # Default to 1 month for rotation safety
@@ -64,12 +64,7 @@ defmodule Apple.AppleMusicAPI do
       "exp" => expired_at
     }
 
-    jwk = JWK.from_pem(private_key)
-    jws = JWS.from_map(header)
-    jwt = JWT.from_map(payload)
-
-    {_, token} = JWT.sign(jwk, jws, jwt) |> JWS.compact()
-    token
+    JWT.sign_es256!(private_key, header, payload)
   end
 
   @doc """
@@ -91,8 +86,4 @@ defmodule Apple.AppleMusicAPI do
   """
   @spec library_url() :: String.t()
   def library_url(), do: "https://api.music.apple.com/v1/me"
-
-  defp unix_time_in_seconds() do
-    DateTime.utc_now() |> DateTime.to_unix()
-  end
 end
