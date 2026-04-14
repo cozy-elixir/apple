@@ -53,7 +53,7 @@ defmodule Apple.MapsServerAPI do
     payload =
       if origin,
         do: Map.put(payload, "origin", origin),
-        else: origin
+        else: payload
 
     JWT.sign_es256!(private_key, header, payload)
   end

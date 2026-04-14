@@ -9,8 +9,10 @@ defmodule Apple.BusinessConnectAPI do
   alias Apple.JWT
   alias Apple.Types.BusinessConnect
 
+  @token_url "https://account.apple.com/auth/oauth2/v2/token"
+
   @spec token_url() :: String.t()
-  def token_url, do: "https://account.apple.com/auth/oauth2/token"
+  def token_url, do: @token_url
 
   @doc "Builds form params for a service-account client-credentials token request."
   @spec service_account_token_params(
@@ -41,7 +43,7 @@ defmodule Apple.BusinessConnectAPI do
              is_binary(client_id) do
     issued_at = JWT.unix_time_in_seconds()
     ttl_seconds = Keyword.get(opts, :ttl_seconds, 3600)
-    audience = Keyword.get(opts, :audience, "https://account.apple.com/auth/oauth2/v2/token")
+    audience = Keyword.get(opts, :audience, @token_url)
 
     header = %{"alg" => "ES256", "kid" => key_id, "typ" => "JWT"}
 
