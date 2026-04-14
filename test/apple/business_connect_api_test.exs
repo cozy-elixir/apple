@@ -62,6 +62,7 @@ defmodule Apple.BusinessConnectAPITest do
   end
 
   test "token_url/0 returns oauth endpoint" do
-    assert Apple.BusinessConnectAPI.token_url() == "https://account.apple.com/auth/oauth2/token"
+    assert Apple.BusinessConnectAPI.token_url() ==
+             "https://account.apple.com/auth/oauth2/v2/token"
   end
 end
