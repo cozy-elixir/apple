@@ -67,7 +67,7 @@ defmodule Apple.MixProject do
         Apple.WeatherKitRestAPI,
         Apple.MapsServerAPI,
         Apple.DeviceCheckAPI,
-        Apple.MapkitJSAPI,
+        Apple.MapKitJSAPI,
         Apple.AppleMusicAPI,
         Apple.GameCenterAPI,
         Apple.CloudKitAPI,

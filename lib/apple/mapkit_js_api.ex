@@ -1,4 +1,4 @@
-defmodule Apple.MapkitJSAPI do
+defmodule Apple.MapKitJSAPI do
   @moduledoc """
   Utilities for [MapKit JS](https://developer.apple.com/documentation/mapkitjs).
 
