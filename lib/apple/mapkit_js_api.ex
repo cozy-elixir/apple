@@ -6,7 +6,7 @@ defmodule Apple.MapKitJSAPI do
   This module provides JWT token generation for authenticating MapKit JS requests.
   """
 
-  alias JOSE.{JWK, JWS, JWT}
+  alias Apple.JWT
   alias Apple.Types.Developer
 
   @doc """
@@ -48,7 +48,7 @@ defmodule Apple.MapKitJSAPI do
       when is_binary(team_id) and
              is_binary(key_id) and
              is_binary(private_key) do
-    issued_at = unix_time_in_seconds()
+    issued_at = JWT.unix_time_in_seconds()
 
     # MapKit JS tokens expire after 1 hour (3600 seconds)
     expired_at = issued_at + 3600
@@ -67,20 +67,11 @@ defmodule Apple.MapKitJSAPI do
       }
       |> maybe_add_origin(opts[:origin])
 
-    jwk = JWK.from_pem(private_key)
-    jws = JWS.from_map(header)
-    jwt = JWT.from_map(payload)
-
-    {_, token} = JWT.sign(jwk, jws, jwt) |> JWS.compact()
-    token
+    JWT.sign_es256!(private_key, header, payload)
   end
 
   defp maybe_add_origin(payload, nil), do: payload
 
   defp maybe_add_origin(payload, origin) when is_binary(origin),
     do: Map.put(payload, "origin", origin)
-
-  defp unix_time_in_seconds() do
-    DateTime.utc_now() |> DateTime.to_unix()
-  end
 end

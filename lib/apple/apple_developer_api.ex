@@ -14,7 +14,7 @@ defmodule Apple.AppleDeveloperAPI do
   specifically for developer account management, not app store operations.
   """
 
-  alias JOSE.{JWK, JWS, JWT}
+  alias Apple.JWT
   alias Apple.Types.AppleDeveloper
 
   @doc """
@@ -48,7 +48,7 @@ defmodule Apple.AppleDeveloperAPI do
       when is_binary(team_id) and
              is_binary(key_id) and
              is_binary(private_key) do
-    issued_at = unix_time_in_seconds()
+    issued_at = JWT.unix_time_in_seconds()
 
     # App Store Connect API tokens expire after 20 minutes maximum
     expired_at = issued_at + 1200
@@ -66,12 +66,7 @@ defmodule Apple.AppleDeveloperAPI do
       "aud" => "appstoreconnect-v1"
     }
 
-    jwk = JWK.from_pem(private_key)
-    jws = JWS.from_map(header)
-    jwt = JWT.from_map(payload)
-
-    {_, token} = JWT.sign(jwk, jws, jwt) |> JWS.compact()
-    token
+    JWT.sign_es256!(private_key, header, payload)
   end
 
   @doc """
@@ -160,9 +155,5 @@ defmodule Apple.AppleDeveloperAPI do
   @spec bundle_id_path(AppleDeveloper.bundle_id()) :: String.t()
   def bundle_id_path(bundle_id) when is_binary(bundle_id) do
     "/bundleIds/#{bundle_id}"
-  end
-
-  defp unix_time_in_seconds() do
-    DateTime.utc_now() |> DateTime.to_unix()
   end
 end

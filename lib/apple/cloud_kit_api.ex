@@ -6,7 +6,7 @@ defmodule Apple.CloudKitAPI do
   for managing records, assets, and queries outside of the Apple ecosystem.
   """
 
-  alias JOSE.{JWK, JWS, JWT}
+  alias Apple.JWT
   alias Apple.Types.CloudKit
 
   @doc """
@@ -34,7 +34,7 @@ defmodule Apple.CloudKitAPI do
   def build_auth_token!(key_id, private_key)
       when is_binary(key_id) and
              is_binary(private_key) do
-    issued_at = unix_time_in_seconds()
+    issued_at = JWT.unix_time_in_seconds()
 
     # CloudKit tokens expire after 1 hour
     expired_at = issued_at + 3600
@@ -50,12 +50,34 @@ defmodule Apple.CloudKitAPI do
       "exp" => expired_at
     }
 
-    jwk = JWK.from_pem(private_key)
-    jws = JWS.from_map(header)
-    jwt = JWT.from_map(payload)
+    JWT.sign_es256!(private_key, header, payload)
+  end
 
-    {_, token} = JWT.sign(jwk, jws, jwt) |> JWS.compact()
-    token
+  @doc """
+  Builds CloudKit Web Services signed request headers.
+
+  `request_path` should be the full CloudKit path, for example:
+
+      /database/1/iCloud.com.example.app/production/public/records/query
+  """
+  @spec signed_headers!(
+          CloudKit.key_id(),
+          CloudKit.private_key(),
+          String.t(),
+          binary(),
+          keyword()
+        ) :: map()
+  def signed_headers!(key_id, private_key, request_path, request_body \\ "", opts \\ [])
+      when is_binary(key_id) and is_binary(private_key) and is_binary(request_path) and
+             is_binary(request_body) do
+    request_date = Keyword.get(opts, :request_date, request_date())
+    payload = Enum.join([request_date, body_sha256(request_body), request_path], ":")
+
+    %{
+      "x-apple-cloudkit-request-keyid" => key_id,
+      "x-apple-cloudkit-request-iso8601date" => request_date,
+      "x-apple-cloudkit-request-signaturev1" => sign_request!(private_key, payload)
+    }
   end
 
   @doc """
@@ -93,7 +115,21 @@ defmodule Apple.CloudKitAPI do
     "https://api.apple-cloudkit.com/database/1/#{container_id}/#{env_str}/#{database}"
   end
 
-  defp unix_time_in_seconds() do
-    DateTime.utc_now() |> DateTime.to_unix()
+  defp request_date do
+    DateTime.utc_now()
+    |> DateTime.truncate(:second)
+    |> DateTime.to_iso8601()
+  end
+
+  defp body_sha256(body) do
+    :crypto.hash(:sha256, body) |> Base.encode64()
+  end
+
+  defp sign_request!(private_key, payload) do
+    [pem_entry | _] = private_key |> :public_key.pem_decode()
+    ec_private_key = :public_key.pem_entry_decode(pem_entry)
+
+    :public_key.sign(payload, :sha256, ec_private_key)
+    |> Base.encode64()
   end
 end
