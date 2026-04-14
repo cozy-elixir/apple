@@ -51,7 +51,7 @@ defmodule Apple.AppleMusicAPI do
     # Apple Music tokens can be valid for up to 6 months
     # Default to 1 month for rotation safety
     expiration_days = Keyword.get(opts, :expiration_days, 30)
-    expired_at = issued_at + expiration_days * 86400
+    expired_at = issued_at + expiration_days * 86_400
 
     header = %{
       "alg" => "ES256",
